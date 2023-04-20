@@ -210,17 +210,20 @@
                 <el-button v-if="scope.row.roleEditFlag" type="danger" size="mini" @click="cancelUpdate(scope.$index,scope.row)">取消</el-button>
 
                 </template>
-
-               
-
                 </el-table-column>
-                    
                 </el-table>
                 <br>
-                <!-- <el-pagination  background layout="sizes, prev, pager, next"  :total="1000"
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange">
-                </el-pagination> -->
+
+                <!-- 分页-->
+                  <el-pagination
+                      @size-change="handleSizeChange"
+                      @current-change="handleCurrentChange"
+                      :current-page="currentPage"
+                      :page-sizes="[3, 4, 5, 6]"
+                      :page-size="pageSize"
+                      layout="total, sizes, prev, pager, next, jumper"
+                      :total="totalData">
+                  </el-pagination>
 
                 </el-main>
 
@@ -270,7 +273,11 @@ export default {
             dialogTableVisibleAdd:false,
             dialogVisibleMore:false,
             dialogVisibleAddRole:false,
-            test:false
+            test:false,
+            totalData:0,
+            currentPage:1,
+            pageSizes:[3,4,5,6],
+            pageSize:3
         }
     },
     methods:{
@@ -307,7 +314,7 @@ export default {
         },
         updateRole(index,row){
         row.roleEditFlag=true;
-        this.$set(row,row.roleEditFlag,true),
+        this.$set(row,row.roleEditFlag,true);
         console.log(row.name)
             
          
@@ -394,29 +401,72 @@ export default {
           });          
         });
             
-        }
+        },
+      handleSizeChange:function(val){
+        this.pageSize=val;
+        //this.$set(this.pageSize,val);
+        //console.log(this.pageSize)
+        axios({
+          url:"http://localhost:8080/role",
+          method:"post",
+          contentType:"application/json",
+          params: {
+            page: this.currentPage,
+            pageSize: this.pageSize,
 
+          }
+        }).then(result=>{
+          //console.log(result.data.role,length);
+          this.roleData=result.data.role;
+          this.totalData=result.data.total;
+          for(var i=0;i<this.roleData.length;i++){
+            this.roleData[i].roleEditFlag=false
+          }
+        })
+      },
+      handleCurrentChange:function(val){
+        this.currentPage=val;
+        axios({
+          url:"http://localhost:8080/role",
+          method:"post",
+          contentType:"application/json",
+          params: {
+            page: this.currentPage,
+            pageSize: this.pageSize,
+
+          }
+        }).then(result=>{
+          //console.log(result.data.role,length);
+          this.roleData=result.data.role;
+          this.totalData=result.data.total;
+          for(var i=0;i<this.roleData.length;i++){
+            this.roleData[i].roleEditFlag=false
+          }
+        })
+      }
     },
     
-    
-    handleSizeChange:function(val){
-            alert("每页记录数变化"+val)
-        },
-    handleCurrentChange:function(val){
-            alert("页码变化"+val)
-        },
+
     updated(){
         //location.reload();
     },
     mounted(){
-        axios.get("http://localhost:8080/role").then(result=>{
-            
-            this.roleData=result.data;
+      axios({
+        url:"http://localhost:8080/role",
+        method:"post",
+        contentType:"application/json",
+        params: {
+          page: this.currentPage,
+          pageSize: this.pageSize,
+
+        }
+          }).then(result=>{
+              console.log(this.pageSizes);
+            this.roleData=result.data.role;
+            this.totalData=result.data.total;
             for(var i=0;i<this.roleData.length;i++){
                 this.roleData[i].roleEditFlag=false
             }
-            
-            //console.log(this.roleData)
         })
     }
     
