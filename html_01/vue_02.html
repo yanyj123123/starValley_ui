@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue_02</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <table border="1" cellspacing="0">
+            <tr>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>成绩</th>
+            <th>等级</th>
+            </tr>
+            
+            <tr v-for="(user,index) in users">
+                <td>{{index+1}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.age}}</td>
+                <td >
+                    <span v-if="user.gender==1">男</span>
+                    <span v-if="user.gender==2">女</span>
+                </td>
+                <td>{{user.score}}</td>
+                <td>
+                    <span v-if="user.score>=90">优秀</span>
+                    <span v-if="user.score<90">良好</span>
+                </td>
+            </tr>    
+            </div>
+            
+        </table>
+    </div>
+</body>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            users:[{
+                "name":"tom",
+                "age":21,
+                "gender":1,
+                "score":86
+            },
+            {
+                "name":"jack",
+                "age":20,
+                "gender":1,
+                "score":90
+            },
+            {
+                "name":"rose",
+                "age":21,
+                "gender":2,
+                "score":93
+            }
+        ]
+        }
+    })
+</script>
+</html>

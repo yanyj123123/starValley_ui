@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js_02</title>
+</head>
+<body>
+    <img id="light" src="../img/on.gif"> <br>
+
+    <input type="button" value="点亮" onclick="clickOn"> 
+    <input type="button"  value="熄灭" onclick="clickOff">
+
+    <br> <br>
+
+    <input type="text" id="name" value="itCast" >
+    <br> <br>
+
+    <input type="checkbox" name="hobby"> 电影
+    <input type="checkbox" name="hobby"> 旅游
+    <input type="checkbox" name="hobby"> 游戏
+    <br>
+
+    <input type="button" value="全选"> 
+    <input type="button" value="反选" >
+    
+</body>
+<script>
+    function clickOn(){
+        //a. 获取img元素对象
+        var img = document.getElementById("light");
+
+        //b. 设置src属性
+        img.src = "../img/1.jpg";
+    }
+
+    function clickOff(){
+        //a. 获取img元素对象
+        var img = document.getElementById("light");
+
+        //b. 设置src属性
+        img.src = "../img/off.gif";
+    }
+</script>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue_01</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- <span v-if="age<=35">年轻人</span>
+        <input v-model="age" type="text"></input> -->
+        <!-- <input type="button" @click="handle()" value="提交"></input> -->
+        <div v-for="addr in addrs">
+            {{ addr }}
+        </div>
+        <hr>
+        <div v-for="(addr,index) in addrs">
+            {{index}},{{ addr }}
+        </div>
+    </div>
+</body>
+<script>
+    //定义vue对象
+    new Vue({
+        el:"#app",//接管的区域
+        data:{
+            age:23,
+            url:"https://www.baidu.com",
+            addrs:["北京","上海","成都","重庆"]
+        },
+        mounted(){
+            alert("发送请求到服务端")
+        },
+        methods:{
+            handle:function(){
+                alert("hahahaha");
+            }
+        }
+    })
+</script>
+</html>

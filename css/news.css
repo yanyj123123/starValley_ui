@@ -1,0 +1,31 @@
+#title{
+    color: #4D4F53;
+}
+#time{
+    color: #888888;
+    font-size: 13px;
+}
+#name{
+    color: #141B23;
+    font-size: 13px;
+}
+a{
+    color: #333333;
+    text-decoration: none;
+}
+p{
+    text-indent: 36px;
+    line-height: 40px;
+}
+#pLast{
+    text-align: right;
+}
+#center{
+    width: 50%;
+    /* margin: 0% 17.5% 0% 17.5%; */
+    margin: 0 auto;
+}
+#imgSet{
+    width: 640px;
+    height: 343px;
+}
